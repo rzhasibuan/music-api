@@ -24,6 +24,14 @@ exports.up = (pgm) => {
     duration: {
       type: 'integer',
     },
+    created_at: {
+      type: 'text',
+      notNull: true,
+    },
+    updated_at: {
+      type: 'text',
+      notNull: true,
+    },
   });
 };
 

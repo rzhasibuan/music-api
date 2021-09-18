@@ -6,6 +6,7 @@ class SongsHandler {
     this._validator = validator;
     // binding
     this.postSongHandler = this.postSongHandler.bind(this);
+    this.getSongsHandler = this.getSongsHandler.bind(this);
   }
 
   async postSongHandler(request, h) {
@@ -42,11 +43,21 @@ class SongsHandler {
       // server error
       const response = h.response({
         status: 'error',
-        message: 'Maaf, terjadi kegagalan pada server kami',
+        message: `Maaf, terjadi kegagalan pada server kami terdapat error: ${error.message}`,
       });
       response.code(500);
       return response;
     }
+  }
+
+  async getSongsHandler() {
+    const songs = await this._service.getSongs();
+    return {
+      status: 'success',
+      data: {
+        songs,
+      },
+    };
   }
 }
 
